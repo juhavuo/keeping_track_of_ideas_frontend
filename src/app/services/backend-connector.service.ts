@@ -12,6 +12,8 @@ export class BackendConnectorService {
   usersUrl = "https://localhost:3000/users";
   ideasUrl = "https://localhost:3000/ideas";
 
+
+
   constructor(private http: HttpClient){}
 
   public login(){
@@ -20,7 +22,15 @@ export class BackendConnectorService {
       password: this.password
     };
 
+    const settings = {
+       headers: new HttpHeaders().set('Content-Type', 'application/json')
+     };
+
     console.log("username: " + this.username + ", password: " + this.password);
+
+    this.http.post(this.usersUrl+'/login', body, settings).subscribe(response =>{
+      console.log(response);
+    });
   }
 
 }
