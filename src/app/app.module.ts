@@ -9,12 +9,14 @@ import { Approuting} from './approuting';
 import { AppComponent } from './app.component';
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { SignupComponent } from './components/signup/signup.component';
+import { IdeasviewComponent } from './components/ideasview/ideasview.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginPageComponent,
-    SignupComponent
+    SignupComponent,
+    IdeasviewComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {BackendConnectorService} from '../../services/backend-connector.service';
+import { Router} from '@angular/router';
 
 @Component({
   selector: 'app-login-page',
@@ -8,9 +9,13 @@ import {BackendConnectorService} from '../../services/backend-connector.service'
 })
 export class LoginPageComponent implements OnInit {
 
-  constructor(public backendConnectorService: BackendConnectorService) { }
+  constructor(private backendConnectorService: BackendConnectorService, public router: Router) { }
 
   ngOnInit() {
+  }
+
+  goToSignup(){
+    this.router.navigate(['signup']);
   }
 
 }
