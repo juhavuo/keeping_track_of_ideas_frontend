@@ -44,4 +44,10 @@ export class BackendConnectorService {
       return this.http.get(this.ideasUrl+'/public');
   }
 
+  public saveIdea(i: Idea){
+    console.log(i);
+    return this.http.post(this.ideasUrl, i, this.settings).subscribe(response =>{
+    });
+  }
+
 }
