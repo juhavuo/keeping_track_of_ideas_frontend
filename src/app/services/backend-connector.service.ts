@@ -41,9 +41,7 @@ export class BackendConnectorService {
   }
 
   public getPublicIdeas(){
-      this.http.get(this.ideasUrl+'/public').subscribe((result: Idea[]) =>{
-        console.log(result);
-      });
+      return this.http.get(this.ideasUrl+'/public');
   }
 
 }

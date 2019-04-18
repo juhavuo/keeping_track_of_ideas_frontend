@@ -4,6 +4,7 @@ import { NgModule} from '@angular/core'
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { IdeasviewComponent } from './components/ideasview/ideasview.component';
+import { AddideaComponent} from './components/addidea/addidea.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,10 @@ const routes: Routes = [
   {
     path: 'ideasview',
     component: IdeasviewComponent
+  },
+  {
+    path: 'addidea',
+    component: AddideaComponent
   }
 ];
 

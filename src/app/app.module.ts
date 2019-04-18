@@ -10,13 +10,15 @@ import { AppComponent } from './app.component';
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { IdeasviewComponent } from './components/ideasview/ideasview.component';
+import { AddideaComponent } from './components/addidea/addidea.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginPageComponent,
     SignupComponent,
-    IdeasviewComponent
+    IdeasviewComponent,
+    AddideaComponent
   ],
   imports: [
     BrowserModule,

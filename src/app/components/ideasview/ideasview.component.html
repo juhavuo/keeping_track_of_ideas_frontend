@@ -1,3 +1,10 @@
-<p>
-  ideasview works!
-</p>
+<h1>Ideas</h1>
+<ul>
+  <li *ngFor = "let idea of ideas">
+    <h3>{{idea.title}}</h3>
+    <p>owner: {{idea.owner}}</p>
+    <p>is_private: {{idea.is_private}}</p>
+    <p>details: {{idea.details}}</p>
+  </li>
+<ul>
+<button (click)="goToAddIdea()">Add new idea</button>
