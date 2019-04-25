@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Idea } from '../../models/idea';
 import { BackendConnectorService } from '../../services/backend-connector.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-addidea',
@@ -23,7 +24,7 @@ export class AddideaComponent implements OnInit {
   linksAsString: string = '';
   tagsAsString: string = '';
 
-  constructor(private backendConnectorService: BackendConnectorService) { }
+  constructor(private backendConnectorService: BackendConnectorService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -35,6 +36,7 @@ export class AddideaComponent implements OnInit {
     this.idea.keywords = tagsArray;
     this.idea.links = linksArray;
     this.backendConnectorService.saveIdea(this.idea);
+    this.router.navigate(['ideasview']);
   }
 
 }

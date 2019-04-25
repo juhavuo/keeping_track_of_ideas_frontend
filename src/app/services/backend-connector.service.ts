@@ -32,6 +32,7 @@ export class BackendConnectorService {
     this.http.post(this.usersUrl+'/login', body, this.settings).subscribe(response =>{
       console.log(response);
       this.router.navigate(['ideasview']);
+      localStorage.setItem('user',this.username);
     });
   }
 
@@ -44,9 +45,29 @@ export class BackendConnectorService {
       return this.http.get(this.ideasUrl+'/public');
   }
 
+  public getIdeasByUser(uname: string){
+
+    const body = {username: uname};
+
+    return this.http.post(this.ideasUrl+'/own', body, this.settings);
+  }
+
   public saveIdea(i: Idea){
-    console.log(i);
     return this.http.post(this.ideasUrl, i, this.settings).subscribe(response =>{
+      console.log(response);
+    });
+  }
+
+  public logout(){
+    return this.http.get(this.usersUrl+'/logout').subscribe(response =>{
+      console.log(response);
+      localStorage.removeItem('user');
+    })
+  }
+
+  public removeIdea(ideaId: string){
+    return this.http.delete(this.ideasUrl+'/'+ideaId, this.settings).subscribe(response=>{
+      console.log(response);
     });
   }
 
