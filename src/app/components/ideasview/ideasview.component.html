@@ -1,9 +1,8 @@
-<h1>Ideas</h1>
+<h1>Own saved ideas</h1>
 <p>Logged in as {{currentuser}}</p>
 <ul>
   <li *ngFor = "let idea of ideas">
     <h3>{{idea.title}}</h3>
-    <p>owner: {{idea.owner}}</p>
     is_private: <button (click)="changePrivacySetting(idea._id,idea.is_private)">{{idea.is_private}}</button><br>
     <p>details: {{idea.details}}</p>
     <button (click) = removeIdea(idea._id)>Remove this idea</button>
@@ -12,4 +11,5 @@
 <br>
 <button (click)="goToAddIdea()">Add new idea</button>
 <br>
+<button (click)="goToPublicIdeas()">View all public ideas</button><br>
 <button (click)="logout()">logout</button>

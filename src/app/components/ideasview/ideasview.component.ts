@@ -52,4 +52,8 @@ export class IdeasviewComponent implements OnInit {
     this.fetchIdeas();
   }
 
+  public goToPublicIdeas(){
+    this.router.navigate(['publicideas']);
+  }
+
 }

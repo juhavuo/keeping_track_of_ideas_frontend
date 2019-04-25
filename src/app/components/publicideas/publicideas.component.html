@@ -1,0 +1,11 @@
+<h1>Public ideas of all users</h1>
+<ul>
+  <li *ngFor = "let idea of public_ideas">
+    <h3>{{idea.title}}</h3>
+    <p>owner: {{idea.owner}}</p>
+    <p>details: {{idea.details}}</p>
+  </li>
+<ul>
+<br>
+<button (click)="goToIdeas()">View own ideas</button><br>
+<button (click)="logout()">logout</button>

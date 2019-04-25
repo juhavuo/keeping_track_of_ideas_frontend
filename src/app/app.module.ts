@@ -11,6 +11,7 @@ import { LoginPageComponent } from './components/login-page/login-page.component
 import { SignupComponent } from './components/signup/signup.component';
 import { IdeasviewComponent } from './components/ideasview/ideasview.component';
 import { AddideaComponent } from './components/addidea/addidea.component';
+import { PublicideasComponent } from './components/publicideas/publicideas.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { AddideaComponent } from './components/addidea/addidea.component';
     LoginPageComponent,
     SignupComponent,
     IdeasviewComponent,
-    AddideaComponent
+    AddideaComponent,
+    PublicideasComponent
   ],
   imports: [
     BrowserModule,
