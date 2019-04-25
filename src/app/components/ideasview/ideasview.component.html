@@ -4,7 +4,7 @@
   <li *ngFor = "let idea of ideas">
     <h3>{{idea.title}}</h3>
     <p>owner: {{idea.owner}}</p>
-    <p>is_private: {{idea.is_private}}</p>
+    is_private: <button (click)="changePrivacySetting(idea._id,idea.is_private)">{{idea.is_private}}</button><br>
     <p>details: {{idea.details}}</p>
     <button (click) = removeIdea(idea._id)>Remove this idea</button>
   </li>

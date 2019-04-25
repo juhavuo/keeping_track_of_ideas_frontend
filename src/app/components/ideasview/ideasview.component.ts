@@ -39,9 +39,16 @@ export class IdeasviewComponent implements OnInit {
     this.router.navigate(['login']);
   }
 
-  public removeIdea(ideaId){
+  public removeIdea(ideaId: string){
     console.log('idea to be removed: ' + ideaId);
     this.backendConnectorService.removeIdea(ideaId);
+    this.fetchIdeas();
+  }
+
+  public changePrivacySetting(ideaId: string, private_currently: boolean){
+    console.log('idea with id' + ideaId);
+    const new_privacy_setting = !private_currently;
+    this.backendConnectorService.changePrivacySetting(ideaId,new_privacy_setting);
     this.fetchIdeas();
   }
 

@@ -71,4 +71,11 @@ export class BackendConnectorService {
     });
   }
 
+  public changePrivacySetting(ideaId: string, new_privacy_setting: boolean){
+    const body = {is_private: new_privacy_setting};
+    return this.http.patch(this.ideasUrl+'/'+ideaId+'/changeVisibility',body,this.settings).subscribe(response=>{
+      console.log(response);
+    });
+  }
+
 }

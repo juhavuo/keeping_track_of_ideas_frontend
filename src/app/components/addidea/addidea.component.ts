@@ -10,9 +10,10 @@ import { Router } from '@angular/router';
 })
 export class AddideaComponent implements OnInit {
 
+
   idea: Idea = {
     _id: '',
-    owner: 'default_1',
+    owner: '',
     is_private: true,
     title: '',
     details: '',
@@ -27,6 +28,9 @@ export class AddideaComponent implements OnInit {
   constructor(private backendConnectorService: BackendConnectorService, private router: Router) { }
 
   ngOnInit() {
+    const ideas_owner = localStorage.getItem('user');
+    this.idea.owner = ideas_owner;
+    console.log(this.idea.owner);
   }
 
   public saveTheIdea(){
