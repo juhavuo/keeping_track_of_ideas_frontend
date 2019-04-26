@@ -56,4 +56,14 @@ export class IdeasviewComponent implements OnInit {
     this.router.navigate(['publicideas']);
   }
 
+  public showTitle(content: string[]){
+    if(content.length == 0){
+      return false;
+    }else if(content.length > 1 || content[0].length > 0){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
 }

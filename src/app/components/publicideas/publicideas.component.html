@@ -1,11 +1,23 @@
 <h1>Public ideas of all users</h1>
 <ul>
-  <li *ngFor = "let idea of public_ideas">
+  <li *ngFor="let idea of public_ideas">
     <h3>{{idea.title}}</h3>
     <p>owner: {{idea.owner}}</p>
     <p>details: {{idea.details}}</p>
+    <p *ngIf=showTitle(idea.keywords)>Tags:</p>
+    <ul>
+      <li *ngFor="let tag of idea.keywords">
+        {{tag}} {{tag.length}}
+      </li>
+    </ul>
+    <p *ngIf = "showTitle(idea.links)">Links:</p>
+    <ul>
+      <li *ngFor="let link of idea.links">
+        {{link}}
+      </li>
+    </ul>
   </li>
-<ul>
+</ul>
 <br>
 <button (click)="goToIdeas()">View own ideas</button><br>
 <button (click)="logout()">logout</button>

@@ -1,13 +1,25 @@
 <h1>Own saved ideas</h1>
 <p>Logged in as {{currentuser}}</p>
 <ul>
-  <li *ngFor = "let idea of ideas">
+  <li *ngFor="let idea of ideas">
     <h3>{{idea.title}}</h3>
     is_private: <button (click)="changePrivacySetting(idea._id,idea.is_private)">{{idea.is_private}}</button><br>
     <p>details: {{idea.details}}</p>
-    <button (click) = removeIdea(idea._id)>Remove this idea</button>
+    <p *ngIf="showTitle(idea.keywords)">Tags:</p>
+    <ul>
+      <li *ngFor="let tag of idea.keywords">
+        {{tag}}
+      </li>
+    </ul>
+    <p *ngIf="showTitle(idea.links)">Links:</p>
+    <ul>
+      <li *ngFor="let link of idea.links">
+        {{link}}
+      </li>
+    </ul>
+    <button (click)=removeIdea(idea._id)>Remove this idea</button>
   </li>
-<ul>
+</ul>
 <br>
 <button (click)="goToAddIdea()">Add new idea</button>
 <br>

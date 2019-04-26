@@ -32,4 +32,14 @@ export class PublicideasComponent implements OnInit {
     this.router.navigate(['ideasview']);
   }
 
+  public showTitle(content: string[]){
+    if(content.length == 0){
+      return false;
+    }else if(content.length > 1 || content[0].length > 0){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
 }
