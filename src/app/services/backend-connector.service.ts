@@ -34,6 +34,7 @@ export class BackendConnectorService {
 
       const token = response.token;
       const id = response.id;
+      console.log(id);
 
       console.log(token);
       localStorage.setItem('token',token);
@@ -97,6 +98,15 @@ export class BackendConnectorService {
     return this.http.patch(this.ideasUrl+'/'+ideaId+'/changeVisibility',body,authSettings).subscribe(response=>{
       console.log(response);
     });
+  }
+
+  public addLike(ideaId: string){
+    const authSettings = {headers: new HttpHeaders().set('Content-Type', 'application/json')
+    .set('token',localStorage.getItem('token'))};
+
+    const body = {};
+
+    return this.http.patch(this.ideasUrl+'/'+ideaId+'/addLike',body,authSettings);
   }
 
 }

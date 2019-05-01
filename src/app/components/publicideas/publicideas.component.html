@@ -16,7 +16,7 @@
         {{link}}
       </li>
     </ul>
-    <p>Number of likes: {{idea.likes}} {{idea.viewers_own}}</p>
+    <p>Number of likes: {{idea.likes}} <button *ngIf = "showButton(idea.viewers_own,idea.liked_by)" (click)="addLike(idea._id)">Add like</button></p>
   </li>
 </ul>
 <br>

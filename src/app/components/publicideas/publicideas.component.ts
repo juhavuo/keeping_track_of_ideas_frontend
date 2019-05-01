@@ -15,6 +15,29 @@ export class PublicideasComponent implements OnInit {
   constructor(private backendConnectorService: BackendConnectorService, private router: Router) { }
 
   ngOnInit() {
+    this.fetchData();
+  }
+
+  public logout(){
+    this.backendConnectorService.logout();
+    this.router.navigate(['login']);
+  }
+
+  public goToIdeas(){
+    this.router.navigate(['ideasview']);
+  }
+
+  public showTitle(content: string[]){
+    if(content.length == 0){
+      return false;
+    }else if(content.length > 1 || content[0].length > 0){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  public fetchData(){
     const currentUser = localStorage.getItem('user');
     this.backendConnectorService.getPublicIdeas().subscribe((result: Idea[]) =>{
       if(result != undefined && result != null){
@@ -36,23 +59,33 @@ export class PublicideasComponent implements OnInit {
     });
   }
 
-  public logout(){
-    this.backendConnectorService.logout();
-    this.router.navigate(['login']);
+  public addLike(userId: string){
+    this.backendConnectorService.addLike(userId).subscribe(result =>{
+      console.log(result);
+      this.fetchData();
+    });
+
   }
 
-  public goToIdeas(){
-    this.router.navigate(['ideasview']);
-  }
+  public showButton(own: boolean, ids: string[]){
 
-  public showTitle(content: string[]){
-    if(content.length == 0){
-      return false;
-    }else if(content.length > 1 || content[0].length > 0){
+    const current_userId = localStorage.getItem('id');
+    console.log(current_userId);
+    let already_liked = false;
+    for(let i = 0; i < ids.length; ++i){
+      if(current_userId == ids[i]){
+        already_liked = true;
+        console.log('already liked');
+        break;
+      }
+    }
+
+    if(!own && !already_liked){
       return true;
     }else{
       return false;
     }
+
   }
 
 }
