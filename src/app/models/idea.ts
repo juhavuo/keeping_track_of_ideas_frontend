@@ -7,4 +7,7 @@ export interface Idea{
   keywords: string[];
   time: string;
   links: string[];
+  liked_by?: string[];
+  likes?: number;
+  viewers_own?: boolean;
 }

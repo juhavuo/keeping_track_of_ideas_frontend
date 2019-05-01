@@ -3,6 +3,7 @@ import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import { User } from '../models/user';
 import { Idea } from '../models/idea';
 import { Router} from '@angular/router';
+import { Logininfo } from '../models/Logininfo';
 
 @Injectable({
   providedIn: 'root'
@@ -29,10 +30,16 @@ export class BackendConnectorService {
 
     console.log("username: " + this.username + ", password: " + this.password);
 
-    this.http.post(this.usersUrl+'/login', body, this.settings).subscribe(response =>{
-      console.log(response);
+    this.http.post(this.usersUrl+'/login', body, this.settings).subscribe((response:Logininfo) =>{
+
+      const token = response.token;
+      const id = response.id;
+
+      console.log(token);
+      localStorage.setItem('token',token);
+      localStorage.setItem('user', this.username);
+      localStorage.setItem('id', id);
       this.router.navigate(['ideasview']);
-      localStorage.setItem('user',this.username);
     });
   }
 
@@ -46,14 +53,20 @@ export class BackendConnectorService {
   }
 
   public getIdeasByUser(uname: string){
-
-    const body = {username: uname};
-
-    return this.http.post(this.ideasUrl+'/own', body, this.settings);
+    //const authToken : string = 'Bearer 'localStorage.getItem('token');
+    const authSettings = {headers: new HttpHeaders().set('Content-Type', 'application/json')
+    .set('token',localStorage.getItem('token'))};
+    const b = {}; //empty body to fill the request slot
+    console.log(this.settings);
+    console.log(authSettings);
+    return this.http.post(this.ideasUrl+'/own',b, authSettings);
   }
 
   public saveIdea(i: Idea){
-    return this.http.post(this.ideasUrl, i, this.settings).subscribe(response =>{
+    const authSettings = {headers: new HttpHeaders().set('Content-Type', 'application/json')
+    .set('token',localStorage.getItem('token'))};
+
+    return this.http.post(this.ideasUrl, i, authSettings).subscribe(response =>{
       console.log(response);
     });
   }
@@ -62,18 +75,26 @@ export class BackendConnectorService {
     return this.http.get(this.usersUrl+'/logout').subscribe(response =>{
       console.log(response);
       localStorage.removeItem('user');
+      localStorage.removeItem('token');
+      localStorage.removeItem('id');
     })
   }
 
   public removeIdea(ideaId: string){
-    return this.http.delete(this.ideasUrl+'/'+ideaId, this.settings).subscribe(response=>{
+    const authSettings = {headers: new HttpHeaders().set('Content-Type', 'application/json')
+    .set('token',localStorage.getItem('token'))};
+
+    return this.http.delete(this.ideasUrl+'/'+ideaId, authSettings).subscribe(response=>{
       console.log(response);
     });
   }
 
   public changePrivacySetting(ideaId: string, new_privacy_setting: boolean){
+    const authSettings = {headers: new HttpHeaders().set('Content-Type', 'application/json')
+    .set('token',localStorage.getItem('token'))};
+
     const body = {is_private: new_privacy_setting};
-    return this.http.patch(this.ideasUrl+'/'+ideaId+'/changeVisibility',body,this.settings).subscribe(response=>{
+    return this.http.patch(this.ideasUrl+'/'+ideaId+'/changeVisibility',body,authSettings).subscribe(response=>{
       console.log(response);
     });
   }
