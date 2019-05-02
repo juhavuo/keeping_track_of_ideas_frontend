@@ -14,6 +14,7 @@ export class AddideaComponent implements OnInit {
   idea: Idea = {
     _id: '',
     owner: '',
+    owner_id: '',
     is_private: true,
     title: '',
     details: '',
@@ -29,7 +30,9 @@ export class AddideaComponent implements OnInit {
 
   ngOnInit() {
     const ideas_owner = localStorage.getItem('user');
+    const ideas_ownerId = localStorage.getItem('id');
     this.idea.owner = ideas_owner;
+    this.idea.owner_id = ideas_ownerId;
     console.log(this.idea.owner);
   }
 

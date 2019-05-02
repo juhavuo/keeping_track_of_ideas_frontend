@@ -1,6 +1,7 @@
 export interface Idea{
   _id: string;
   owner: string;
+  owner_id: string;
   is_private: boolean;
   title: string;
   details: string;

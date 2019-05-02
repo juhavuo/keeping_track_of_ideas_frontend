@@ -109,4 +109,14 @@ export class BackendConnectorService {
     return this.http.patch(this.ideasUrl+'/'+ideaId+'/addLike',body,authSettings);
   }
 
+  public addComment(ideaId: string, comment: string){
+    const authSettings = {headers: new HttpHeaders().set('Content-Type', 'application/json')
+    .set('token',localStorage.getItem('token'))};
+
+    const body = {'comment': comment };
+
+    return this.http.patch(this.ideasUrl+'/'+ideaId+'/addComment',body,authSettings);
+
+  }
+
 }

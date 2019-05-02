@@ -11,10 +11,16 @@ import { Idea } from '../../models/idea';
 export class PublicideasComponent implements OnInit {
 
   public_ideas: Idea[];
+  show_comments: boolean;
+  show_add_comment: boolean;
+  comment_text: string;
 
   constructor(private backendConnectorService: BackendConnectorService, private router: Router) { }
 
   ngOnInit() {
+    this.show_comments = false;
+    this.show_add_comment = false;
+    this.comment_text = '';
     this.fetchData();
   }
 
@@ -27,6 +33,7 @@ export class PublicideasComponent implements OnInit {
     this.router.navigate(['ideasview']);
   }
 
+  //if there is no tags or links, one must not show the title for links or tags
   public showTitle(content: string[]){
     if(content.length == 0){
       return false;
@@ -37,6 +44,7 @@ export class PublicideasComponent implements OnInit {
     }
   }
 
+  //gets the public ideas data from the backend to show in html
   public fetchData(){
     const currentUser = localStorage.getItem('user');
     this.backendConnectorService.getPublicIdeas().subscribe((result: Idea[]) =>{
@@ -59,23 +67,31 @@ export class PublicideasComponent implements OnInit {
     });
   }
 
+  //for adding like, after like is added, refetces the data to show correct amout of likes and
+  //to make addjustments to ui (hides the like button from the liked idea)
   public addLike(userId: string){
     this.backendConnectorService.addLike(userId).subscribe(result =>{
       console.log(result);
       this.fetchData();
     });
-
   }
 
+  public addComment(idea_id: string){
+    this.backendConnectorService.addComment(idea_id, this.comment_text).subscribe(result =>{
+      console.log(result);
+    });
+    this.show_add_comment = false;
+  }
+
+  //for like button: shows button only, when one can like the idea
+  //one can like idea if idea is not ones own and if one hasn't like it already
   public showButton(own: boolean, ids: string[]){
 
     const current_userId = localStorage.getItem('id');
-    console.log(current_userId);
     let already_liked = false;
     for(let i = 0; i < ids.length; ++i){
       if(current_userId == ids[i]){
         already_liked = true;
-        console.log('already liked');
         break;
       }
     }
@@ -86,6 +102,30 @@ export class PublicideasComponent implements OnInit {
       return false;
     }
 
+  }
+
+  //for button to show or hide comments
+  public toggleComments(){
+    this.show_comments = !this.show_comments;
+  }
+
+  //for showing the comments in html
+  public showComments(comments: string[]){
+
+    if(!this.show_comments){
+      return false;
+    }else{
+      if(comments.length > 0){
+        return true;
+      }else{
+        return false;
+      }
+    }
+  }
+
+  //to show add comment section
+  public showAddComment(){
+    this.show_add_comment = true;
   }
 
 }
