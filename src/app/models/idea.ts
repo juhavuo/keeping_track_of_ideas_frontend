@@ -11,4 +11,6 @@ export interface Idea{
   liked_by?: string[];
   likes?: number;
   viewers_own?: boolean;
+  show_comments?: boolean;
+  show_add_comment?: boolean;
 }

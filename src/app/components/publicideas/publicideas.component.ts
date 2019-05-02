@@ -11,15 +11,11 @@ import { Idea } from '../../models/idea';
 export class PublicideasComponent implements OnInit {
 
   public_ideas: Idea[];
-  show_comments: boolean;
-  show_add_comment: boolean;
   comment_text: string;
 
   constructor(private backendConnectorService: BackendConnectorService, private router: Router) { }
 
   ngOnInit() {
-    this.show_comments = false;
-    this.show_add_comment = false;
     this.comment_text = '';
     this.fetchData();
   }
@@ -57,6 +53,12 @@ export class PublicideasComponent implements OnInit {
           }else{
             this.public_ideas[i].viewers_own = false;
           }
+          if(this.public_ideas[i].show_comments == undefined){
+            this.public_ideas[i].show_comments = false;
+          }
+          if(this.public_ideas[i].show_add_comment == undefined){
+            this.public_ideas[i].show_add_comment = false;
+          }
           number_of_likes = 0;
           for(let j = 0; j<this.public_ideas[i].liked_by.length; ++j){
             ++number_of_likes
@@ -79,8 +81,10 @@ export class PublicideasComponent implements OnInit {
   public addComment(idea_id: string){
     this.backendConnectorService.addComment(idea_id, this.comment_text).subscribe(result =>{
       console.log(result);
+      this.hideCommentAdding(idea_id);
+      this.fetchData();
     });
-    this.show_add_comment = false;
+
   }
 
   //for like button: shows button only, when one can like the idea
@@ -105,14 +109,19 @@ export class PublicideasComponent implements OnInit {
   }
 
   //for button to show or hide comments
-  public toggleComments(){
-    this.show_comments = !this.show_comments;
+  public toggleComments(id: string){
+    for(let i = 0; i<this.public_ideas.length; ++i){
+      if(this.public_ideas[i]._id == id){
+        this.public_ideas[i].show_comments = !this.public_ideas[i].show_comments;
+        break;
+      }
+    }
   }
 
   //for showing the comments in html
-  public showComments(comments: string[]){
+  public showComments(show: boolean,comments: string[]){
 
-    if(!this.show_comments){
+    if(!show){
       return false;
     }else{
       if(comments.length > 0){
@@ -124,8 +133,24 @@ export class PublicideasComponent implements OnInit {
   }
 
   //to show add comment section
-  public showAddComment(){
-    this.show_add_comment = true;
+  public showAddComment(id: String){
+    for(let i = 0; i<this.public_ideas.length; ++i){
+      if(this.public_ideas[i]._id == id){
+        this.public_ideas[i].show_add_comment = true;
+        break;
+      }
+    }
   }
+
+  private hideCommentAdding(id: String){
+    for(let i = 0; i<this.public_ideas.length; ++i){
+      if(this.public_ideas[i]._id == id){
+        this.public_ideas[i].show_add_comment = false;
+        break;
+      }
+    }
+  }
+
+
 
 }

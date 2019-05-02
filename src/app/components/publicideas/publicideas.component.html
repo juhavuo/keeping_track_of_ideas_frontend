@@ -17,17 +17,17 @@
       </li>
     </ul>
     <p>Number of likes: {{idea.likes}} <button *ngIf = "showButton(idea.viewers_own,idea.liked_by)" (click)="addLike(idea._id)">Add like</button></p>
-    <button (click) = "toggleComments()">{{show_comments == true? 'Hide comments': 'Show comments'}}</button>
-    <p *ngIf = "showComments(idea.comments)">Comments</p>
-    <ul *ngIf = "showComments(idea.comments)">
+    <button (click) = "toggleComments(idea._id)">{{show_comments == true? 'Hide comments': 'Show comments'}}</button>
+    <p *ngIf = "showComments(idea.show_comments,idea.comments)">Comments</p>
+    <ul *ngIf = "showComments(idea.show_comments,idea.comments)">
       <li *ngFor = "let comment of idea.comments">
         <p>From {{comment.commenter_name}} at {{comment.comment_time}}</p>
         <p>{{comment.comment_text}}</p>
       </li>
     </ul>
     <br>
-    <button (click) = "showAddComment()">Add comment</button>
-    <div *ngIf = "show_add_comment">
+    <button (click) = "showAddComment(idea._id)">Add comment</button>
+    <div *ngIf = "idea.show_add_comment">
       <input type="text" [(ngModel)] = "comment_text">
       <button (click) = "addComment(idea._id)">Add comment</button>
     </div>
