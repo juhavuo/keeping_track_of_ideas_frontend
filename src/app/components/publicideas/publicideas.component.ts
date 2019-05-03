@@ -29,6 +29,10 @@ export class PublicideasComponent implements OnInit {
     this.router.navigate(['ideasview']);
   }
 
+  public goToSearchByTag(tag: string){
+    console.log(tag);
+  }
+
   //if there is no tags or links, one must not show the title for links or tags
   public showTitle(content: string[]){
     if(content.length == 0){

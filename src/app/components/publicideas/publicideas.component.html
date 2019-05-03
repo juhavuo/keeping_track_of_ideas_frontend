@@ -1,23 +1,23 @@
 <h1>Public ideas of all users</h1>
-<ul>
-  <li *ngFor="let idea of public_ideas">
+<ul >
+  <li id="content_box" *ngFor="let idea of public_ideas">
     <h3>{{idea.title}}</h3>
     <p>owner: {{idea.owner}}</p>
     <p>details: {{idea.details}}</p>
     <p *ngIf=showTitle(idea.keywords)>Tags:</p>
-    <ul>
-      <li *ngFor="let tag of idea.keywords">
-        {{tag}} {{tag.length}}
+    <ul class="horizontal">
+      <li class= "spaced" *ngFor="let tag of idea.keywords">
+        <button (click) = "goToSearchByTag(tag)">{{tag}}</button>
       </li>
     </ul>
     <p *ngIf = "showTitle(idea.links)">Links:</p>
-    <ul>
-      <li *ngFor="let link of idea.links">
+    <ul class="horizontal">
+      <li class="spaced" *ngFor="let link of idea.links">
         {{link}}
       </li>
     </ul>
     <p>Number of likes: {{idea.likes}} <button *ngIf = "showButton(idea.viewers_own,idea.liked_by)" (click)="addLike(idea._id)">Add like</button></p>
-    <button (click) = "toggleComments(idea._id)">{{show_comments == true? 'Hide comments': 'Show comments'}}</button>
+    <button (click) = "toggleComments(idea._id)">{{idea.show_comments == true? 'Hide comments': 'Show comments'}}</button>
     <p *ngIf = "showComments(idea.show_comments,idea.comments)">Comments</p>
     <ul *ngIf = "showComments(idea.show_comments,idea.comments)">
       <li *ngFor = "let comment of idea.comments">
