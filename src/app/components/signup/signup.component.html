@@ -4,5 +4,10 @@ Enter your username: <input type="text" [(ngModel)]="user.username">
 <br>
 Enter your password: <input type="password" [(ngModel)]="user.password">
 <br>
+Enter your password again: <input type="password" [(ngModel)]="password_second"><br>
 <button (click)="register()">Register user</button>
 <br>
+<div *ngIf = "show_error_div">
+  <p>{{error_message}}</p>
+  <button (click)="hideErrors()">OK</button>
+</div>
