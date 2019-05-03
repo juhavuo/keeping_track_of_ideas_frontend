@@ -119,4 +119,9 @@ export class BackendConnectorService {
 
   }
 
+  public showPublicCommentsByTag(tag: string){
+
+    return this.http.get(this.ideasUrl+'/public/searchByTag/'+tag);
+  }
+
 }

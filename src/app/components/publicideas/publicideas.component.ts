@@ -12,6 +12,7 @@ export class PublicideasComponent implements OnInit {
 
   public_ideas: Idea[];
   comment_text: string;
+  tag_view_selected: boolean = false;
 
   constructor(private backendConnectorService: BackendConnectorService, private router: Router) { }
 
@@ -29,8 +30,39 @@ export class PublicideasComponent implements OnInit {
     this.router.navigate(['ideasview']);
   }
 
-  public goToSearchByTag(tag: string){
+  public showByTag(tag: string){
+    const currentUser = localStorage.getItem('user');
+    this.tag_view_selected = true;
     console.log(tag);
+    this.backendConnectorService.showPublicCommentsByTag(tag).subscribe((result: Idea[]) =>{
+      if(result != undefined && result != null){
+        this.public_ideas = result;
+        let number_of_likes;
+        for(let i = 0; i<this.public_ideas.length;++i){
+          if(this.public_ideas[i].owner == currentUser){
+            this.public_ideas[i].viewers_own = true;
+          }else{
+            this.public_ideas[i].viewers_own = false;
+          }
+          if(this.public_ideas[i].show_comments == undefined){
+            this.public_ideas[i].show_comments = false;
+          }
+          if(this.public_ideas[i].show_add_comment == undefined){
+            this.public_ideas[i].show_add_comment = false;
+          }
+          number_of_likes = 0;
+          for(let j = 0; j<this.public_ideas[i].liked_by.length; ++j){
+            ++number_of_likes
+          }
+          this.public_ideas[i].likes = number_of_likes;
+        }
+      }
+    });
+  }
+
+  public reshowAllPublicIdeas(){
+    this.fetchData();
+    this.tag_view_selected = false;
   }
 
   //if there is no tags or links, one must not show the title for links or tags
@@ -154,7 +186,5 @@ export class PublicideasComponent implements OnInit {
       }
     }
   }
-
-
 
 }
