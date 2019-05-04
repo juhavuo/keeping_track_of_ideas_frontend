@@ -1,41 +1,43 @@
-<h1>Public ideas of all users</h1>
-<ul >
-  <button *ngIf="tag_view_selected" (click)="reshowAllPublicIdeas()">View all public messages</button>
-  <li id="content_box" *ngFor="let idea of public_ideas">
-    <h3>{{idea.title}}</h3>
-    <p>posted at {{idea.time}}</p>
-    <p>owner: {{idea.owner}}</p>
-    <p>details: {{idea.details}}</p>
-    <p *ngIf=showTitle(idea.keywords)>Tags:</p>
-    <ul class="horizontal">
-      <li class= "spaced" *ngFor="let tag of idea.keywords">
-        <button (click) = "showByTag(tag)">{{tag}}</button>
-      </li>
-    </ul>
-    <p *ngIf = "showTitle(idea.links)">Links:</p>
-    <ul class="horizontal">
-      <li class="spaced" *ngFor="let link of idea.links">
-        {{link}}
-      </li>
-    </ul>
-    <p>Number of likes: {{idea.likes}} <button *ngIf = "showLikebutton(idea.owner_id,idea.liked_by)" (click)="addLike(idea._id)">Add like</button></p>
-    <button (click) = "toggleComments(idea._id)">{{idea.show_comments == true? 'Hide comments': 'Show comments'}}</button>
-    <p *ngIf = "showComments(idea.show_comments,idea.comments)">Comments</p>
-    <ul *ngIf = "showComments(idea.show_comments,idea.comments)">
-      <li *ngFor = "let comment of idea.comments">
+<div id="main">
+  <h1>Public ideas of all users</h1>
+  <ul>
+    <button *ngIf="tag_view_selected" (click)="reshowAllPublicIdeas()">View all public messages</button>
+    <li id="content_box" *ngFor="let idea of public_ideas">
+      <h3>{{idea.title}}</h3>
+      <p>posted at {{idea.time}}</p>
+      <p>owner: {{idea.owner}}</p>
+      <p>details: {{idea.details}}</p>
+      <p *ngIf=showTitle(idea.keywords)>Tags:</p>
+      <ul class="horizontal">
+        <li class="spaced" *ngFor="let tag of idea.keywords">
+          <button (click)="showByTag(tag)">{{tag}}</button>
+        </li>
+      </ul>
+      <p *ngIf="showTitle(idea.links)">Links:</p>
+      <ul class="horizontal">
+        <li class="spaced" *ngFor="let link of idea.links">
+          {{link}}
+        </li>
+      </ul>
+      <p>Number of likes: {{idea.likes}} <button *ngIf="showLikebutton(idea.owner_id,idea.liked_by)" (click)="addLike(idea._id)">Add like</button></p>
+      <button (click)="toggleComments(idea._id)">{{idea.show_comments == true? 'Hide comments': 'Show comments'}}</button>
+      <p *ngIf="showComments(idea.show_comments,idea.comments)">Comments</p>
+      <ul *ngIf="showComments(idea.show_comments,idea.comments)">
+        <li *ngFor="let comment of idea.comments">
           From {{comment.commenter_name}} at {{comment.comment_time}}
-          <button *ngIf = "show_remove_comments_b(comment.commenter_id)" (click) = "removeComment(idea._id,comment.commenter_id,comment._id)">Remove comment</button><br>
-        <p>id: {{comment._id}}: {{comment.comment_text}}</p>
-      </li>
-    </ul>
-    <br>
-    <button (click) = "showAddComment(idea._id)">Add comment</button>
-    <div *ngIf = "idea.show_add_comment">
-      <input type="text" [(ngModel)] = "comment_text">
-      <button (click) = "addComment(idea._id)">Add comment</button>
-    </div>
-  </li>
-</ul>
-<br>
-<button (click)="goToIdeas()">View own ideas</button><br>
-<button (click)="logout()">logout</button>
+          <button *ngIf="show_remove_comments_b(comment.commenter_id)" (click)="removeComment(idea._id,comment.commenter_id,comment._id)">Remove comment</button><br>
+          <p>id: {{comment._id}}: {{comment.comment_text}}</p>
+        </li>
+      </ul>
+      <br>
+      <button (click)="showAddComment(idea._id)">Add comment</button>
+      <div *ngIf="idea.show_add_comment">
+        <input type="text" [(ngModel)]="comment_text">
+        <button (click)="addComment(idea._id)">Add comment</button>
+      </div>
+    </li>
+  </ul>
+  <br>
+  <button (click)="goToIdeas()">View own ideas</button><br>
+  <button (click)="logout()">logout</button>
+</div>

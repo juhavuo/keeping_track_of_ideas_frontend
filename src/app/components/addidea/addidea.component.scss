@@ -1,0 +1,25 @@
+div {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  align: center;
+  margin-left:auto;
+  margin-right: auto;
+  margin-top: 20px;
+  border-style: double;
+  border-width: thin;
+  padding-bottom: 20px;
+  max-width: 600px;
+  background-color: linen;
+}
+
+button{
+  float: center;
+  padding: 5px;
+  margin-top: 10px;
+  background-color: antiquewhite;
+}
+
+input{
+  margin-left: 10px;
+}

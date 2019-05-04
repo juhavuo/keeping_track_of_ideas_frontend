@@ -1,10 +1,12 @@
-<h1>Login</h1>
-
-Username: <input type="text" [(ngModel)]="backendConnectorService.username">
-<br>
-Password: <input type="password" [(ngModel)]="backendConnectorService.password">
-<br>
-<button (click)="backendConnectorService.login()">Logging</button>
-<br>
-
-<button (click)="goToSignup()">Sign up</button>
+<div>
+  <h1>Login</h1>
+  Username:
+  <input type="text" size="30" [(ngModel)]="backendConnectorService.username">
+  <br>
+  Password:
+  <input type="password" size="30" [(ngModel)]="backendConnectorService.password">
+  <br>
+  <button (click)="backendConnectorService.login()">Logging</button>
+  <br>
+  <button (click)="goToSignup()">Sign up</button>
+</div>

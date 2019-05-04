@@ -1,27 +1,29 @@
-<h1>Own saved ideas</h1>
-<p>Logged in as {{currentuser}}</p>
-<ul>
-  <li id="content_box" *ngFor="let idea of ideas">
-    <h3>{{idea.title}}</h3>
-    is_private: <button (click)="changePrivacySetting(idea._id,idea.is_private)">{{idea.is_private}}</button><br>
-    <p>details: {{idea.details}}</p>
-    <p *ngIf="showTitle(idea.keywords)">Tags:</p>
-    <ul class="horizontal">
-      <li id="tag" *ngFor="let tag of idea.keywords">
-        {{tag}}
-      </li>
-    </ul>
-    <p *ngIf="showTitle(idea.links)">Links:</p>
-    <ul>
-      <li *ngFor="let link of idea.links">
-        {{link}}
-      </li>
-    </ul>
-    <button id="remove_idea" (click)=removeIdea(idea._id)>Remove this idea</button>
-  </li>
-</ul>
-<br>
-<button (click)="goToAddIdea()">Add new idea</button>
-<br>
-<button (click)="goToPublicIdeas()">View all public ideas</button><br>
-<button (click)="logout()">logout</button>
+<div id="main">
+  <h1>Own saved ideas</h1>
+  <p>Logged in as {{currentuser}}</p>
+  <ul>
+    <li id="content_box" *ngFor="let idea of ideas">
+      <h3>{{idea.title}}</h3>
+      is_private: <button (click)="changePrivacySetting(idea._id,idea.is_private)">{{idea.is_private}}</button><br>
+      <p>details: {{idea.details}}</p>
+      <p *ngIf="showTitle(idea.keywords)">Tags:</p>
+      <ul class="horizontal">
+        <li id="tag" *ngFor="let tag of idea.keywords">
+          {{tag}}
+        </li>
+      </ul>
+      <p *ngIf="showTitle(idea.links)">Links:</p>
+      <ul>
+        <li *ngFor="let link of idea.links">
+          {{link}}
+        </li>
+      </ul>
+      <button id="remove_idea" (click)=removeIdea(idea._id)>Remove this idea</button>
+    </li>
+  </ul>
+  <br>
+  <button (click)="goToAddIdea()">Add new idea</button>
+  <br>
+  <button (click)="goToPublicIdeas()">View all public ideas</button><br>
+  <button (click)="logout()">logout</button>
+</div>
