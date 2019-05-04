@@ -39,11 +39,7 @@ export class PublicideasComponent implements OnInit {
         this.public_ideas = result;
         let number_of_likes;
         for(let i = 0; i<this.public_ideas.length;++i){
-          if(this.public_ideas[i].owner == currentUser){
-            this.public_ideas[i].viewers_own = true;
-          }else{
-            this.public_ideas[i].viewers_own = false;
-          }
+
           if(this.public_ideas[i].show_comments == undefined){
             this.public_ideas[i].show_comments = false;
           }
@@ -84,11 +80,7 @@ export class PublicideasComponent implements OnInit {
         this.public_ideas = result;
         let number_of_likes;
         for(let i = 0; i<this.public_ideas.length;++i){
-          if(this.public_ideas[i].owner == currentUser){
-            this.public_ideas[i].viewers_own = true;
-          }else{
-            this.public_ideas[i].viewers_own = false;
-          }
+
           if(this.public_ideas[i].show_comments == undefined){
             this.public_ideas[i].show_comments = false;
           }
@@ -123,9 +115,24 @@ export class PublicideasComponent implements OnInit {
 
   }
 
+  public removeComment(idea_id: string, commenter_id: string, comment_id: string){
+    this.backendConnectorService.removeComment(idea_id,commenter_id, comment_id).subscribe(result =>{
+      console.log(result);
+    });
+  }
+
+  public show_remove_comments_b(commenter_id: string){
+    const current_userId = localStorage.getItem('id');
+    if(commenter_id == current_userId){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
   //for like button: shows button only, when one can like the idea
   //one can like idea if idea is not ones own and if one hasn't like it already
-  public showButton(own: boolean, ids: string[]){
+  public showLikebutton(owner_id: string, ids: string[]){
 
     const current_userId = localStorage.getItem('id');
     let already_liked = false;
@@ -136,7 +143,7 @@ export class PublicideasComponent implements OnInit {
       }
     }
 
-    if(!own && !already_liked){
+    if(!(owner_id == current_userId) && !already_liked){
       return true;
     }else{
       return false;

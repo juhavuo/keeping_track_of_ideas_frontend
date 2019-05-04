@@ -19,7 +19,6 @@ export class AddideaComponent implements OnInit {
     title: '',
     details: '',
     keywords: [],
-    time: '',
     links: []
   };
 

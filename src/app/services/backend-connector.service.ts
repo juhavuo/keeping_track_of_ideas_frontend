@@ -119,6 +119,19 @@ export class BackendConnectorService {
 
   }
 
+  public removeComment(idea_id: string, commenter_id: string, comment_id: string){
+
+    const authSettings = {headers: new HttpHeaders().set('Content-Type', 'application/json')
+    .set('token',localStorage.getItem('token'))};
+
+    const body = {
+      'commenter_id': commenter_id,
+      'comment_id': comment_id
+    };
+
+    return this.http.patch(this.ideasUrl+'/'+idea_id+ '/removeComment',body,authSettings);
+  }
+
   public showPublicCommentsByTag(tag: string){
 
     return this.http.get(this.ideasUrl+'/public/searchByTag/'+tag);
