@@ -13,6 +13,7 @@ export class PublicideasComponent implements OnInit {
   public_ideas: Idea[];
   comment_text: string;
   tag_view_selected: boolean = false;
+  fetched_tag: string = '';
 
   constructor(private backendConnectorService: BackendConnectorService, private router: Router) { }
 
@@ -32,8 +33,28 @@ export class PublicideasComponent implements OnInit {
 
   public showByTag(tag: string){
     const currentUser = localStorage.getItem('user');
+    this.fetched_tag = tag;
     this.tag_view_selected = true;
-    console.log(tag);
+    this.fetchDataWithTag(this.fetched_tag);
+  }
+
+  public reshowAllPublicIdeas(){
+    this.fetchData();
+    this.tag_view_selected = false;
+  }
+
+  //if there is no tags or links, one must not show the title for links or tags
+  public showTitle(content: string[]){
+    if(content.length == 0){
+      return false;
+    }else if(content.length > 1 || content[0].length > 0){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  public fetchDataWithTag(tag: string){
     this.backendConnectorService.showPublicCommentsByTag(tag).subscribe((result: Idea[]) =>{
       if(result != undefined && result != null){
         this.public_ideas = result;
@@ -54,22 +75,6 @@ export class PublicideasComponent implements OnInit {
         }
       }
     });
-  }
-
-  public reshowAllPublicIdeas(){
-    this.fetchData();
-    this.tag_view_selected = false;
-  }
-
-  //if there is no tags or links, one must not show the title for links or tags
-  public showTitle(content: string[]){
-    if(content.length == 0){
-      return false;
-    }else if(content.length > 1 || content[0].length > 0){
-      return true;
-    }else{
-      return false;
-    }
   }
 
   //gets the public ideas data from the backend to show in html
@@ -102,7 +107,11 @@ export class PublicideasComponent implements OnInit {
   public addLike(userId: string){
     this.backendConnectorService.addLike(userId).subscribe(result =>{
       console.log(result);
-      this.fetchData();
+      if(this.tag_view_selected){
+        this.fetchDataWithTag(this.fetched_tag);
+      }else{
+        this.fetchData();
+      }
     });
   }
 
@@ -110,7 +119,11 @@ export class PublicideasComponent implements OnInit {
     this.backendConnectorService.addComment(idea_id, this.comment_text).subscribe(result =>{
       console.log(result);
       this.hideCommentAdding(idea_id);
-      this.fetchData();
+      if(this.tag_view_selected){
+        this.fetchDataWithTag(this.fetched_tag);
+      }else{
+        this.fetchData();
+      }
     });
 
   }
@@ -118,6 +131,11 @@ export class PublicideasComponent implements OnInit {
   public removeComment(idea_id: string, commenter_id: string, comment_id: string){
     this.backendConnectorService.removeComment(idea_id,commenter_id, comment_id).subscribe(result =>{
       console.log(result);
+      if(this.tag_view_selected){
+        this.fetchDataWithTag(this.fetched_tag);
+      }else{
+        this.fetchData();
+      }
     });
   }
 
