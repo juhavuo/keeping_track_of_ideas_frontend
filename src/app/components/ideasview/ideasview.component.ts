@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BackendConnectorService} from '../../services/backend-connector.service';
 import { Idea } from '../../models/idea';
 import { Router } from '@angular/router';
+import { Editideaparameters} from '../../models/Editideaparameters';
 
 @Component({
   selector: 'app-ideasview',
@@ -16,6 +17,11 @@ export class IdeasviewComponent implements OnInit {
   constructor(private backendConnectorService: BackendConnectorService, private router: Router) { }
 
   ngOnInit() {
+
+    if(localStorage.getItem('token') == undefined){
+      this.router.navigate(['login']);
+    }
+
     this.currentuser = localStorage.getItem('user');
     this.fetchIdeas();
   }
@@ -37,6 +43,26 @@ export class IdeasviewComponent implements OnInit {
   public logout(){
     this.backendConnectorService.logout();
     this.router.navigate(['login']);
+  }
+
+
+  public editidea(idea: Idea){
+
+    const user_id = localStorage.getItem('id');
+
+    const editideaParameters = {
+      title: idea.title,
+      id : idea._id,
+      details: idea.details,
+      tags: idea.keywords,
+      links: idea.links
+    };
+
+    const paramstring = JSON.stringify(editideaParameters);
+
+    localStorage.setItem(user_id, paramstring);
+
+    this.router.navigate(['editidea']);
   }
 
   public removeIdea(ideaId: string){

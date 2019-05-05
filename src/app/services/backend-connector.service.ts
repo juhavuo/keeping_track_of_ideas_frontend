@@ -53,8 +53,19 @@ export class BackendConnectorService {
       return this.http.get(this.ideasUrl+'/public');
   }
 
+
+  public getIdeaById(ideaId: string){
+    const authSettings = {headers: new HttpHeaders().set('Content-Type', 'application/json')
+    .set('token',localStorage.getItem('token'))};
+
+    const body = {};
+
+    return this.http.post(this.ideasUrl+'/'+ideaId,body, authSettings);
+  }
+
   public getIdeasByUser(uname: string){
     //const authToken : string = 'Bearer 'localStorage.getItem('token');
+
     const authSettings = {headers: new HttpHeaders().set('Content-Type', 'application/json')
     .set('token',localStorage.getItem('token'))};
     const b = {}; //empty body to fill the request slot
@@ -88,6 +99,19 @@ export class BackendConnectorService {
     return this.http.delete(this.ideasUrl+'/'+ideaId, authSettings).subscribe(response=>{
       console.log(response);
     });
+  }
+
+  public editIdea(ideaId: string, title: string, details: string, tags: string[], links: string[]){
+    const authSettings = {headers: new HttpHeaders().set('Content-Type', 'application/json')
+    .set('token',localStorage.getItem('token'))};
+    const body ={
+      'title': title,
+      'details': details,
+      'tags': tags,
+      'links': links
+    }
+
+    return this.http.patch(this.ideasUrl+'/'+ideaId+'/modifyIdea',body,authSettings);
   }
 
   public changePrivacySetting(ideaId: string, new_privacy_setting: boolean){

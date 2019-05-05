@@ -6,6 +6,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { IdeasviewComponent } from './components/ideasview/ideasview.component';
 import { AddideaComponent} from './components/addidea/addidea.component';
 import { PublicideasComponent} from './components/publicideas/publicideas.component';
+import { EditideaComponent } from './components/editidea/editidea.component';
 
 const routes: Routes = [
   {
@@ -32,6 +33,10 @@ const routes: Routes = [
   {
     path: 'publicideas',
     component: PublicideasComponent
+  },
+  {
+    path: 'editidea',
+    component: EditideaComponent
   }
 ];
 

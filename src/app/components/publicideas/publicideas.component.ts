@@ -18,6 +18,12 @@ export class PublicideasComponent implements OnInit {
   constructor(private backendConnectorService: BackendConnectorService, private router: Router) { }
 
   ngOnInit() {
+
+    if(localStorage.getItem('token') == undefined){
+      console.log('reroute to login');
+      this.router.navigate(['login']);
+    }
+
     this.comment_text = '';
     this.fetchData();
   }

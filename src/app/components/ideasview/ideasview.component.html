@@ -18,7 +18,9 @@
           {{link}}
         </li>
       </ul>
-      <button id="remove_idea" (click)=removeIdea(idea._id)>Remove this idea</button>
+      <br>
+      <button (click) = "editidea(idea)">Edit idea</button>
+      <button (click)="removeIdea(idea._id)">Remove this idea</button>
     </li>
   </ul>
   <br>
