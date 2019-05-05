@@ -71,6 +71,7 @@ export class IdeasviewComponent implements OnInit {
     this.fetchIdeas();
   }
 
+  //visibility to outside world can be changed
   public changePrivacySetting(ideaId: string, private_currently: boolean){
     console.log('idea with id' + ideaId);
     const new_privacy_setting = !private_currently;
@@ -82,6 +83,7 @@ export class IdeasviewComponent implements OnInit {
     this.router.navigate(['publicideas']);
   }
 
+  //for html, if there is no links or tags, the title for them is not shown
   public showTitle(content: string[]){
     if(content.length == 0){
       return false;

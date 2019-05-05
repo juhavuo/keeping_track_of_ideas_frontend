@@ -145,6 +145,7 @@ export class PublicideasComponent implements OnInit {
     });
   }
 
+  //for html, the remove comments button is showed only, when comment is made by current user
   public show_remove_comments_b(commenter_id: string){
     const current_userId = localStorage.getItem('id');
     if(commenter_id == current_userId){

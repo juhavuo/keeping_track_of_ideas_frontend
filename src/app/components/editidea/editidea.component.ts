@@ -49,6 +49,7 @@ export class EditideaComponent implements OnInit {
 
   }
 
+  //to modify links and tags array in one string, using comma to separate them
   private convertToList(string_array: string[]){
     let builded_string = '';
     for(let i = 0; i < string_array.length;++i){
@@ -60,10 +61,12 @@ export class EditideaComponent implements OnInit {
     return builded_string;
   }
 
+  //from comma separeted back to array
   private convertStringToList(list: string){
     return list.split(',');
   }
 
+  //sends changes via backendconnector to backend
   public makeEdit(){
     this.new_edit_idea_parameters.tags = this.convertStringToList(this.new_tagsAsString);
     this.new_edit_idea_parameters.links = this.convertStringToList(this.new_linksAsString);
