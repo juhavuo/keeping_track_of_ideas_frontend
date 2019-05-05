@@ -1,10 +1,12 @@
-<h1>Edit idea</h1>
-Title (Old value: {{editideaParameters.title}})<br>
-<input [(ngModel)] = "new_edit_idea_parameters.title" type="text"><br>
-Content (Old value: {{editideaParameters.details}})<br>
-<input [(ngModel)] = "new_edit_idea_parameters.details" type="text"><br>
-Tags (Old value {{tagsAsString}})<br>
-<input [(ngModel)] = "new_tagsAsString" type="text"><br>
-Links (Old value {{linksAsString}})<br>
-<input [(ngModel)] = "new_linksAsString" type="text"><br>
-<button (click) = "makeEdit()">Save edits</button>
+<div>
+  <h1>Edit idea</h1>
+  Title (Old value: {{editideaParameters.title}})<br>
+  <input [(ngModel)]="new_edit_idea_parameters.title" type="text"><br>
+  Content (Old value: {{editideaParameters.details}})<br>
+  <input [(ngModel)]="new_edit_idea_parameters.details" type="text"><br>
+  Tags (Old value {{tagsAsString}})<br>
+  <input [(ngModel)]="new_tagsAsString" type="text"><br>
+  Links (Old value {{linksAsString}})<br>
+  <input [(ngModel)]="new_linksAsString" type="text"><br>
+  <button (click)="makeEdit()">Save edits</button>
+</div>
