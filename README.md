@@ -2,26 +2,15 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.8.
 
-## Development server
+Note! There is one vulnerability, that should be fixed, it this would be in proper use. More security
+features must also be added.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+This is peared with keeping_track_of_ideas backend.
 
-## Code scaffolding
+BackendConnector connects this to node.js express server. There is pages for login, register, view public ideas and
+view ideas of current user. In public ideas view there is possibility to click tag, so that only ideas tagged with
+that tag is shown. There is differences what is shown in public and in own ideas. Only in public view comments and likes
+can be added and only from view of own ideas visibility of ideas can be changed and ideas can be edited and removed.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+localStorage is used to store token from the backend and also some other information. Tokens are removed, when user
+logs out.
