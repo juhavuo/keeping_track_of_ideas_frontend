@@ -13,8 +13,8 @@ export class BackendConnectorService {
   username: string;
   password: string;
 
-  usersUrl = "https://env-3421573.jelastic.metropolia.fi/users";
-  ideasUrl = "https://env-3421573.jelastic.metropolia.fi/ideas";
+  usersUrl = "https://env-XXXXXXX.jelastic.metropolia.fi/users";
+  ideasUrl = "https://env-XXXXXXX.jelastic.metropolia.fi/ideas";
 
   settings = {
      headers: new HttpHeaders().set('Content-Type', 'application/json')
